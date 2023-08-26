@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <body>
+    <div ng-app="app" ng-controller="tableController">
+      <table border="1">
+        <tr>
+          <!-- <th ng-repeat="column in newRows">{{column}}</th> -->
+          <th ng-repeat="column in columns">{{column}}</th>
+        </tr>
+        <tr ng-repeat="row in rows">
+          <td ng-repeat="column in columns">{{row[column]}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      var app = angular.module("app", []);
+      app.controller("tableController", function ($scope, $http) {
+        $scope.newRows = ["Name", "Role", "Department"];
+        $scope.rows = [
+          {
+            user_name: "GP",
+            user_role: "dev",
+            user_department: "IT",
+          },
+          {
+            user_name: "krishna",
+            user_role: "QA",
+            user_department: "IT",
+          },
+          {
+            user_name: "seeta",
+            user_role: "PM",
+            user_department: "PM",
+          },
+          {
+            user_name: "arjun",
+          },
+        ];
+        $scope.columns = Object.keys($scope.rows[0]);
+      });
+    </script>
+  </body>
+</html>
