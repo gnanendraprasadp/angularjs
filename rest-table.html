@@ -7,9 +7,6 @@
       	<label>Enter URL</label>
         <input ng-model="url" type="text"></input>
         <button ng-click="getData()">Get Data</button>
-        <button>Export to CSV</button>
-        <button>Export to Excel</button>
-        <button>Export to PDF</button>
       </form><br/>
       
       <table border="1">
@@ -28,7 +25,7 @@
       	$scope.getData = function(){
         	$http.get($scope.url).then(function(response) {
    	 			$scope.rows = response.data;
-                $scope.columns = Object.keys($scope.rows[0]);
+          $scope.columns = Object.keys($scope.rows[0]);
   			});
         }
       });
