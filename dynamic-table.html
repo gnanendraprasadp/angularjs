@@ -30,9 +30,9 @@
         };
         
         $scope.getData = function(data){
-        	$http.get(data).then(function(response) {
-    		    $scope.rows = response.data;
- 	 	});
+           $http.get(data).then(function(response) {
+    	      $scope.rows = response.data;
+ 	   });
         }
       });
     </script>
