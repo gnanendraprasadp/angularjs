@@ -26,7 +26,7 @@
       var app = angular.module("app", []);
       app.controller("tableController", function ($scope, $http) {
         $scope.click = function (index) {
-          console.log(index);
+          alert("Report will be downloaded");
         };
         
         $scope.getData = function(data){
