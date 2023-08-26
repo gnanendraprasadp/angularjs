@@ -3,10 +3,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-csv/0.3.6/ng-csv.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.9/angular-sanitize.min.js"></script>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/alasql/0.4.2/alasql.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.9.2/xlsx.core.min.js"></script>
-  
 
   <body>
     <div ng-app="app" ng-controller="tableController">
@@ -15,7 +11,6 @@
         <input ng-model="url" type="text"></input>
         <button ng-click="getData()">Get Data</button>
         <button ng-csv="rows" filename="test.csv" csv-header="columns" ng-show="rows.length>0">Export to CSV</button>
-        <button ng-click="excelExport()" ng-show="rows.length>0">Export to Excel</button>
       </form><br/>
       
       <table border="1">
@@ -38,10 +33,6 @@
                 $scope.columns = Object.keys($scope.rows[0]);
   			});
         }
-        
-        $scope.excelExport = function(){
-  			alasql('SELECT * INTO XLSX("test.xlsx",{headers:true}) FROM ?', $scope.rows);
-		}
         
       });
     </script>
