@@ -1,32 +1,59 @@
 <!DOCTYPE html>
 <html>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/excellentexport@3.4.3/dist/excellentexport.min.js"></script>
+  <script
+    type="text/javascript"
+    src="https://cdn.jsdelivr.net/npm/excellentexport@3.4.3/dist/excellentexport.min.js"
+  ></script>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  />
 
   <style>
     .button {
       background-color: green;
       border-radius: 5px;
       color: white;
-      padding: .5em;
+      padding: 0.5em;
       text-decoration: none;
     }
-
   </style>
-  
-	<!-- https://github.com/jmaister/excellentexport -->
+
+  <!-- https://github.com/jmaister/excellentexport -->
 
   <body>
+    <h1>Excel Export</h1>
+    <h4>By Gnanendra Prasad P</h4>
     <div ng-app="app" ng-controller="tableController">
       <form>
         <label>Enter URL</label>
         <input ng-model="url" type="text" />
         <button ng-click="getData()">Get Data</button><br /><br />
 
-        <a ng-show="rows.length>0" class="button" href="#" onclick="getCsv(this)">Export to CSV</a>
-        <a ng-show="rows.length>0" class="button" href="#" onclick="getXls(this)">Export to Xls</a>
-        <a ng-show="rows.length>0" class="button" href="#" onclick="getXlsx(this)">Export to Xlsx</a>
-      </form><br />
+        <a
+          ng-show="rows.length>0"
+          class="button"
+          href="#"
+          onclick="getCsv(this)"
+          >Export to CSV</a
+        >
+        <a
+          ng-show="rows.length>0"
+          class="button"
+          href="#"
+          onclick="getXls(this)"
+          >Export to Xls</a
+        >
+        <a
+          ng-show="rows.length>0"
+          class="button"
+          href="#"
+          onclick="getXlsx(this)"
+          >Export to Xlsx</a
+        >
+      </form>
+      <br />
 
       <table border="1" id="datatable">
         <tr>
@@ -40,55 +67,68 @@
 
     <script>
       function getCsv(data) {
-        return ExcellentExport.convert({
-          anchor: data,
-          filename: 'data',
-          format: 'csv'
-        }, [{
-          name: 'Sheet 1',
-          from: {
-            table: 'datatable'
-          }
-        }]);
+        return ExcellentExport.convert(
+          {
+            anchor: data,
+            filename: "data",
+            format: "csv",
+          },
+          [
+            {
+              name: "Sheet 1",
+              from: {
+                table: "datatable",
+              },
+            },
+          ]
+        );
       }
 
       function getXls(data) {
-        return ExcellentExport.convert({
-          anchor: data,
-          filename: 'data',
-          format: 'xls'
-        }, [{
-          name: 'Sheet 1',
-          from: {
-            table: 'datatable'
-          }
-        }]);
+        return ExcellentExport.convert(
+          {
+            anchor: data,
+            filename: "data",
+            format: "xls",
+          },
+          [
+            {
+              name: "Sheet 1",
+              from: {
+                table: "datatable",
+              },
+            },
+          ]
+        );
       }
 
       function getXlsx(data) {
-        return ExcellentExport.convert({
-          anchor: data,
-          filename: 'data',
-          format: 'xlsx'
-        }, [{
-          name: 'Sheet 1',
-          from: {
-            table: 'datatable'
-          }
-        }]);
+        return ExcellentExport.convert(
+          {
+            anchor: data,
+            filename: "data",
+            format: "xlsx",
+          },
+          [
+            {
+              name: "Sheet 1",
+              from: {
+                table: "datatable",
+              },
+            },
+          ]
+        );
       }
       var app = angular.module("app", []);
-      app.controller("tableController", function($scope, $http) {
+      app.controller("tableController", function ($scope, $http) {
         $scope.rows = [];
-        $scope.getData = function() {
-          $http.get($scope.url).then(function(response) {
+        $scope.getData = function () {
+          $http.get($scope.url).then(function (response) {
             $scope.rows = response.data;
             $scope.columns = Object.keys($scope.rows[0]);
           });
-        }
+        };
       });
-
     </script>
   </body>
-
 </html>

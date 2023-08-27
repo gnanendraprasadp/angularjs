@@ -1,40 +1,50 @@
 <!DOCTYPE html>
 <html>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+  />
 
   <body>
+    <h1>REST Table (Improved)</h1>
+    <h4>By Gnanendra Prasad P</h4>
     <div ng-app="app" ng-controller="tableController">
-
       <form>
         <label>Enter URL</label>
         <input type="text" ng-model="url" />
         <button ng-click="getData(url)">Get Data</button>
-      </form><br />
+      </form>
+      <br />
       <table border="1">
         <tr>
           <th ng-repeat="(key,value) in rows[0]">{{key}}</th>
         </tr>
         <tr ng-repeat="data in rows">
-          <td ng-style="$index== 1 && {'text-decoration': 'underline','color': 'blue', 'cursor': 'pointer'}" ng-click="data.id == 6 && $index== 2 && click($index)" ng-repeat="column in data">{{column}}</td>
+          <td
+            ng-style="$index== 1 && {'text-decoration': 'underline','color': 'blue', 'cursor': 'pointer'}"
+            ng-click="data.id == 6 && $index== 2 && click($index)"
+            ng-repeat="column in data"
+          >
+            {{column}}
+          </td>
         </tr>
       </table>
     </div>
 
     <script>
       var app = angular.module("app", []);
-      app.controller("tableController", function($scope, $http) {
-        $scope.click = function(index) {
+      app.controller("tableController", function ($scope, $http) {
+        $scope.click = function (index) {
           console.log(index);
         };
 
-        $scope.getData = function(data) {
-          $http.get(data).then(function(response) {
+        $scope.getData = function (data) {
+          $http.get(data).then(function (response) {
             $scope.rows = response.data;
           });
-        }
+        };
       });
-
     </script>
   </body>
-
 </html>
