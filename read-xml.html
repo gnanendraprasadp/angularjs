@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <body>
+    <div ng-app="app" ng-controller="controller">
+      <input type="file" id="xmlFileInput" />
+      <button ng-click="readXML()">Read XML</button>
+    </div>
+
+    <script>
+      var app = angular.module("app", []);
+      app.controller("controller", function ($scope, $http) {
+        $scope.readXML = function () {
+          var file = document.getElementById("xmlFileInput").files[0];
+
+          if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              var xmlContent = e.target.result;
+              console.log(xmlContent);
+
+			        //To access particular content
+              var parser = new DOMParser();
+              var xmlDoc = parser.parseFromString(xmlContent, "text/xml");
+
+              var rootElement = xmlDoc.documentElement;
+              console.log(rootElement.nodeName);
+            };
+            reader.readAsText(file);
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
