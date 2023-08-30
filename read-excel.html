@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <body>
+    <div ng-app="app" ng-controller="controller">
+      <input type="file" id="excelInput" />
+      <button ng-click="readExcel()">Read Excel</button>
+    </div>
+
+    <script>
+      var app = angular.module("app", []);
+      app.controller("controller", function ($scope, $http) {
+        $scope.readExcel = function () {
+          var file = document.getElementById("excelInput").files[0];
+
+          if (file) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+              var excelContent = e.target.result;
+              console.log(excelContent);
+
+              var workbook = XLSX.read(excelContent, { type: "array" });
+              var firstSheetName = workbook.SheetNames[0];
+              var worksheet = workbook.Sheets[firstSheetName];
+
+              var excelJsonData = XLSX.utils.sheet_to_json(worksheet, {
+                raw: true,
+              });
+              console.log(excelJsonData);
+            };
+            reader.readAsArrayBuffer(file);
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
