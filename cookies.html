@@ -28,6 +28,10 @@
           $cookies.remove($scope.key);
         };
       });
+
+      window.onbeforeunload = () => {
+        $cookies.remove('name');
+      }
     </script>
     <div ng-app="cookie" ng-controller="CookieController">
       Key:<input type="text" ng-model="key" />
