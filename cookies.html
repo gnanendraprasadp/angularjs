@@ -29,9 +29,10 @@
         };
       });
 
-      window.onbeforeunload = () => {
+      window.onbeforeunload = function () {
         $cookies.remove('name');
-      }
+        return "Do you really want to close?";
+      };
     </script>
     <div ng-app="cookie" ng-controller="CookieController">
       Key:<input type="text" ng-model="key" />
