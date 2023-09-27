@@ -12,35 +12,35 @@
   </head>
 
   <body style="text-align: center">
-    <h2>set, get and clear cookies in AngularJs</h2>
-
     <script type="text/javascript">
-      var app = angular.module("MyApp", ["ngCookies"]);
+      var app = angular.module("cookie", ["ngCookies"]);
 
-      app.controller("CookiesController", function ($scope, $window, $cookies) {
-        $scope.SetCookies = function () {
-          $cookies.put("username", $scope.username);
+      app.controller("CookieController", function ($scope, $window, $cookies) {
+        $scope.setCookies = function () {
+          $cookies.put($scope.key, $scope.value);
         };
 
-        $scope.GetCookies = function () {
-          $window.alert($cookies.get("username"));
+        $scope.getCookies = function () {
+          $window.alert($cookies.get($scope.key));
         };
 
-        $scope.ClearCookies = function () {
-          $cookies.remove("username");
+        $scope.clearCookies = function () {
+          $cookies.remove($scope.key);
         };
       });
     </script>
-    <div ng-app="MyApp" ng-controller="CookiesController">
-      Username:
-      <input type="text" ng-model="username" />
+    <div ng-app="cookie" ng-controller="CookieController">
+      Key:<input type="text" ng-model="key" />
       <br />
       <br />
-      <input type="button" value="Set Cookies" ng-click="SetCookies()" />
+      Value:<input type="text" ng-model="value" />
+      <br />
+      <br />
+      <input type="button" value="Set Cookie" ng-click="setCookies()" />
 
-      <input type="button" value="Get Cookies" ng-click="GetCookies()" />
+      <input type="button" value="Get Cookie" ng-click="getCookies()" />
 
-      <input type="button" value="Clear Cookies" ng-click="ClearCookies()" />
+      <input type="button" value="Clear Cookie" ng-click="clearCookies()" />
     </div>
   </body>
 </html>
