@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <body>
+    <h1>Table</h1>
+    <h4>By Gnanendra Prasad P</h4>
+    <div ng-app="app" ng-controller="tableController">
+      <table border="1">
+        <tr>
+          <th>
+            <input
+              type="checkbox"
+              ng-model="checkAll"
+              ng-change="selectAll()"
+            />
+          </th>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Department</th>
+        </tr>
+        <tr ng-repeat="row in rows">
+          <td>
+            <input
+              type="checkbox"
+              ng-model="row.isChecked"
+              ng-change="select()"
+            />
+          </td>
+          <td ng-repeat="column in columns">{{row[column]}}</td>
+        </tr>
+      </table>
+      <button ng-click="approveReject('APPROVED')">Approve</button>
+      <button ng-click="approveReject('REJECTED')">Reject</button>
+    </div>
+
+    <script>
+      var app = angular.module("app", []);
+      app.controller("tableController", function ($scope, $http) {
+        $scope.newRows = ["Name", "Role", "Department"];
+        $scope.rows = [
+          {
+            user_name: "GP",
+            user_role: "dev",
+            user_department: "IT",
+          },
+          {
+            user_name: "krishna",
+            user_role: "QA",
+            user_department: "IT",
+          },
+          {
+            user_name: "seeta",
+            user_role: "PM",
+            user_department: "PM",
+          },
+        ];
+        $scope.columns = Object.keys($scope.rows[0]);
+
+        $scope.checkAll = false;
+
+        $scope.select = function () {
+          for (var i = 0; i < $scope.rows.length; i++) {
+            if (!$scope.rows[i].isChecked) {
+              $scope.checkAll = false;
+              return;
+            }
+            $scope.checkAll = true;
+          }
+        };
+
+        $scope.selectAll = function () {
+          for (var i = 0; i < $scope.rows.length; i++) {
+            $scope.rows[i].isChecked = $scope.checkAll;
+          }
+        };
+        
+        $scope.approveReject = function(key){
+          for (var i = 0; i < $scope.rows.length; i++) {
+            if($scope.rows[i].isChecked){
+            	console.log($scope.rows[i])
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
