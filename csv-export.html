@@ -27,17 +27,7 @@
     </div>
 
     <script>
-      var app = angular.module("app", ['ngSanitize', 'ngCsv']);
-      app.controller("tableController", function ($scope, $http) {
-      	$scope.rows = [];
-      	$scope.getData = function(){
-        	$http.get($scope.url).then(function(response) {
-   	 			$scope.rows = response.data;
-                $scope.columns = Object.keys($scope.rows[0]);
-  			});
-        }
-        
-      });
+      var app=angular.module("app",['ngSanitize','ngCsv']);app.controller("tableController",function($scope,$http){$scope.rows=[];$scope.getData=function(){$http.get($scope.url).then(function(response){$scope.rows=response.data;$scope.columns=Object.keys($scope.rows[0])})}})
     </script>
   </body>
 </html>
